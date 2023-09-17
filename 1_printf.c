@@ -28,7 +28,7 @@ int _printf(const char *format, ...)
 		else if (*(format + 1) == 'd' || *(format + 1) == 'i')
 		{
 			num = va_arg(args, int);
-			count += _putInt(unsigned int num, int *pCount);
+			_putInt((unsigned int)num, &count);
 			format++;
 		}
 		else
