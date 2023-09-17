@@ -21,7 +21,7 @@ int _printf(const char *format, ...)
 		if (*format != '%')
 			count += _putchar(*format);
 		else if (*(format + 1) == '%')
-			count += _putchar('%');
+			count += _putchar('%'), format++;
 		else if (*(format + 1) == 'c')
 		{
 			c = va_arg(args, int);
