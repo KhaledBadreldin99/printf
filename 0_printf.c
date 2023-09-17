@@ -30,9 +30,9 @@ int _printf(const char *format, ...)
 		}
 		else if (*(format + 1) == 's')
 		{
-			*str = va_arg(args, char *);
+			str = va_arg(args, char *);
 			str = (str == NULL) ? "(null)" : str;
-			count += _putchar(str);
+			count += _putstr(str, _strlen(str));
 			format++;
 		}
 		else
