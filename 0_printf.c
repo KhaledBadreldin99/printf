@@ -9,6 +9,7 @@ int _printf(const char *format, ...)
 	va_list args;
 	int count = 0;
 	char *str;
+	char c;
 
 	va_start(args, format);
 
@@ -25,18 +26,22 @@ int _printf(const char *format, ...)
 		}
 		else if (*(format + 1) == 'c')
 		{
-			count += _putchar(va_arg(args, int));
+			c = va_arg(args, int);
+			count += _putchar(c);
 			format++;
 		}
 		else if (*(format + 1) == 's')
 		{
 			str = va_arg(args, char *);
-			str = (str == NULL) ? "(null)" : str;
+			if (str == NULL)
+				str = "(null)";
 			count += _putstr(str, _strlen(str));
 			format++;
 		}
 		else
+		{
 			count += _putchar(*format);
+		}
 		format++;
 	}
 	va_end(args);
