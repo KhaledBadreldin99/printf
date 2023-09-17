@@ -1,42 +1,44 @@
 #include "main.h"
-#include <unistd.h>
 /**
- * _printf - our own printf function.
- * @format: The format string.
- * Return: The number of characters printed (excluding the null byte).
+ * _printf - ower own printf function
+ * @format: the format string
+ * Return: number of characters printed (excluding null)
 */
-int _printf(const char *format, ...);
+int _printf(const char *format, ...)
 {
 	va_list args;
-	int printed_chars = 0;
+	int count = 0;
+	char *str;
 
 	va_start(args, format);
 
+	if (!format)
+		return (-1);
 	while (*format)
 	{
 		if (*format != '%')
+			count += _putchar(*format);
+		else if (*(format + 1) == '%')
 		{
-			write(1, format, 1);
-			printed_chars++;
+			count += _putchar('%');
+			format++;
 		}
-		else if (*(++format))
+		else if (*(format + 1) == 'c')
 		{
-			if (*format == 'c')
-				printed_chars++, write(1, (char[]){va_arg(args, int)}, 1);
-			else if (*format == 's')
-			{
-				char *str = va_arg(args, char *) ?: "(null)";
-
-				for (; *str; str++, printed_chars++)
-					write(1, str, 1);
-			}
-			else if (*format == '%')
-				printed_chars++, write(1, "%", 1);
-			else
-				printed_chars++, write(1, "%", 1), write(1, format, 1);
+			count += _putchar(va_arg(args, int));
+			format++;
 		}
+		else if (*(format + 1) == 's')
+		{
+			*str = va_arg(args, char *);
+			str = (str == NULL) ? "(null)" : str;
+			count += _putchar(str);
+			format++;
+		}
+		else
+			count += _putchar(*format);
 		format++;
 	}
 	va_end(args);
-	return (printed_chars);
+	return (count);
 }
