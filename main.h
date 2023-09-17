@@ -6,26 +6,28 @@
 #include <stdlib.h>
 #include <stdio.h>
 /**
- * struct sp_char - sturct for the special character
+ * struct sp_char - for the special character
  * @ch: symbole of the special character
- * @fun: pointer to fun to print the argument
+ * @fun: pointer to function
 */
 typedef struct sp_char
 {
 	char ch;
 	int (*fun)(va_list, int *);
-} spCar;
+}
+spChar;
 
 /**
- * struct signs - sturct for the special character
+ * struct signs - for the special character
  * @ch: symbole of the signs
- * @fun: pointer to fun to print sign
+ * @fun: pointer to print sign
 */
 typedef struct signs
 {
 	char ch;
 	void (*fun)(int, char, int, va_list, int *);
-} sign;
+}
+sign;
 
 int _strlen(char *s);
 int _printf(const char *format, ...);
