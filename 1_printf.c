@@ -8,12 +8,17 @@
 */
 void _putInt(unsigned int num, int *pCount)
 {
-	char *p_buff;
-	int size;
-
-	p_buff = itoa(va_arg(list, int), 10);
-
-	size = print((p_buff != NULL) ? p_buff : "NULL");
-
-	return (size);
+	/*if its negative num */
+	if ((int)num < 0)
+	{
+		_putchar('-');
+		*pCount += 1;
+		num *= -1;
+	}
+	/*check if the num not one digit*/
+	if (num / 10)
+		_putInt(num / 10, pCount); /* call the fun again if not one digit*/
+	/* print the num in ascii by adding 48 */
+	_putchar(num % 10 + '0');
+	*pCount += 1;
 }

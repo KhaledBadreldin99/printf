@@ -16,7 +16,7 @@ void _putInt(unsigned int num, int *pCount)
 	/* number more than 1 digit*/
 	if (num / 10)
 	{
-		putInt(num / 10, pCount);
+		_putInt(num / 10, pCount);
 	}
 	_putchar(num % 10 + '0');
 	*pCount += 1;
