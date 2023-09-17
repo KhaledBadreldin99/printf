@@ -1,8 +1,7 @@
 #include "main.h"
 
 /**
- * print_integer - print a number in base 10
- * @_putInt - function that print an int
+ * _putInt - function that print an int
  * @num: the integer we want to print
  * @pCount: pointer to the counter to know num of int being printed
  * Return: Length of the numbers in decimal
