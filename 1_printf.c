@@ -1,24 +1,42 @@
 #include "main.h"
-
 /**
- * _putInt - function that print an int
- * @num: the integer we want to print
- * @pCount: pointer to the counter to know num of int being printed
- * Return: Length of the numbers in decimal
+ * _printf - custom printf function.
+ * @format: the format string
+ *
+ * Return: the number of characters printed (excluding null byte)
 */
-void _putInt(unsigned int num, int *pCount)
+int _printf(const char *format, ...)
 {
-	/*if its negative num */
-	if ((int)num < 0)
+	va_list args;
+	int count = 0;
+	int num;
+
+	va_start(args, format);
+	if (!format)
+		return (-1);
+	while (*format)
 	{
-		_putchar('-');
-		*pCount += 1;
-		num *= -1;
+		if (*format != '%')
+		{
+			count += _putchar(*format);
+		}
+		else if (*(format + 1) == '%')
+		{
+			count += _putchar('%');
+			format++;
+		}
+		else if (*(format + 1) == 'd' || *(format + 1) == 'i')
+		{
+			num = va_arg(args, int);
+			count += _putInt(unsigned int num, int *pCount);
+			format++;
+		}
+		else
+		{
+			count += _putchar(*format);
+		}
+		format++;
 	}
-	/*check if the num not one digit*/
-	if (num / 10)
-		_putInt(num / 10, pCount); /* call the fun again if not one digit*/
-	/* print the num in ascii by adding 48 */
-	_putchar(num % 10 + '0');
-	*pCount += 1;
+	va_end(args);
+	return (count);
 }
