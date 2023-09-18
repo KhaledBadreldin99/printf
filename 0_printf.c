@@ -13,7 +13,6 @@ int _printf(const char *format, ...)
 	int num;
 
 	va_start(args, format);
-
 	if (!format || (format[0] == '%' && !format[1]))
 		return (-1);
 	if (format[0] == '%' && format[1] == ' ' && !format[2])
@@ -44,9 +43,7 @@ int _printf(const char *format, ...)
 		else
 		{
 			count += _putchar(*format);
-		}
-		format++;
-	}
-	va_end(args);
-	return (count);
+		} format++;
+	} va_end(args);
+return (count);
 }
